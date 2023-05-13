@@ -17,6 +17,11 @@ const App = () => {
   const user = useSelector(state => state.auth.user);
   useEffect(() => {
     console.log(user);
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
   });
   return (
     <StyledEngineProvider injectFirst>
