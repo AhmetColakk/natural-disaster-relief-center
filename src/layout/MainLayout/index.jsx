@@ -85,7 +85,7 @@ const MainLayout = () => {
   console.log(auth);
   useEffect(() => {
     if (!user) {
-      navigate('/pages/login/login3');
+      // navigate('/pages/login/login3');
     }
   }, []);
 

@@ -43,7 +43,7 @@ import {
   signOutUser,
   registerWithGoogleUser,
 } from '@/store/auth/authSlice';
-import { registerUser } from '../../../../store/auth/actions';
+import { registerUserWithEmailAndPassword } from '../../../../store/auth/authSlice';
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
 const FirebaseRegister = ({ ...others }) => {
@@ -58,7 +58,12 @@ const FirebaseRegister = ({ ...others }) => {
   const [level, setLevel] = useState();
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const state = useSelector(state => state);
+  console.log(state);
 
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
   const googleHandler = async () => {
     console.log('Register');
     const provider = registerWithGoogleUser();
@@ -81,7 +86,7 @@ const FirebaseRegister = ({ ...others }) => {
   useEffect(() => {
     console.log(user);
     if (user) {
-      navigate('/');
+      navigate('/dashboard');
     }
   }, [user]);
   useEffect(() => {
@@ -98,11 +103,16 @@ const FirebaseRegister = ({ ...others }) => {
       if (scriptedRef.current) {
         setStatus({ success: true });
         setSubmitting(false);
-        const newUser = registerUser(values.email, values.password);
+        const newUser = registerUserWithEmailAndPassword(
+          values.email,
+          values.password,
+        );
         console.log(newUser);
 
-        newUser(dispatch);
-        navigate('/');
+        await newUser(dispatch);
+        if (user) {
+          navigate('/dashboard');
+        }
       }
     } catch (err) {
       console.error(err);

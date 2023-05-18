@@ -36,7 +36,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from '@/assets/images/icons/social-google.svg';
 import { handleSignin, signinWithGoogle } from '@/store/auth/authSlice';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
@@ -59,7 +59,7 @@ const FirebaseLogin = ({ ...others }) => {
   useEffect(() => {
     console.log(!authLoading && user);
     if (user) {
-      navigate('/');
+      navigate('/dashboard');
     }
   }, [user]);
   useEffect(() => {
@@ -177,7 +177,7 @@ const FirebaseLogin = ({ ...others }) => {
                 console.log(values);
                 const singinUser = handleSignin(values.email, values.password);
                 await singinUser(dispatch);
-                navigate('/');
+                navigate('/dashboard');
               } catch (err) {
                 console.error(err);
                 if (scriptedRef.current) {

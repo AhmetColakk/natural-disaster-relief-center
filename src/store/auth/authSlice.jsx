@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   signOut,
   signInWithRedirect,
+  createUserWithEmailAndPassword,
 } from './../../services/firebase';
 
 export const authSlice = createSlice({
@@ -19,6 +20,9 @@ export const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
       state.status = 'succeeded';
+    },
+    setStatus: (state, action) => {
+      state.status = action.payload;
     },
     removeUser: state => {
       state.user = null;
@@ -35,7 +39,8 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setUser, removeUser, setError, clearError } = authSlice.actions;
+export const { setUser, removeUser, setError, clearError, setStatus } =
+  authSlice.actions;
 
 export const handleSignin = (email, password) => async dispatch => {
   try {
@@ -67,27 +72,32 @@ export const signOutUser = () => async dispatch => {
   }
 };
 // Async thunk to register a user with email and password
-export const registerUser = (email, password) => async dispatch => {
-  console.log('register user');
+export const registerUserWithEmailAndPassword =
+  (email, password) => async dispatch => {
+    console.log('register user');
 
-  try {
-    dispatch(clearError());
-    dispatch(setStatus('loading'));
+    // dispatch(clearError());
+    // dispatch(setStatus('loading'));
 
     // Create a new user with email and password
-    const userCredential = await auth.createUserWithEmailAndPassword(
-      email,
-      password,
-    );
-    const user = userCredential.user;
-    if (user) {
-      const parsedUser = JSON.parse(JSON.stringify(user));
-      dispatch(setUser(parsedUser));
+    try {
+      dispatch(clearError());
+      dispatch(setStatus('loading'));
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user;
+      if (user) {
+        const parsedUser = JSON.parse(JSON.stringify(user));
+        dispatch(setUser(parsedUser));
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch(setError(err.message));
     }
-  } catch (error) {
-    dispatch(setError(error.message));
-  }
-};
+  };
 export const registerWithGoogleUser = () => async dispatch => {
   console.log('register user with google ');
 

@@ -11,6 +11,7 @@ import themes from './themes';
 // project imports
 import NavigationScroll from './layout/NavigationScroll';
 import { useEffect } from 'react';
+import AppRoutes from './routes';
 
 const App = () => {
   const customization = useSelector(state => state.customization);
@@ -27,9 +28,8 @@ const App = () => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={themes(customization)}>
         <CssBaseline />
-        <NavigationScroll>
-          <Routes />
-        </NavigationScroll>
+
+        <AppRoutes />
       </ThemeProvider>
     </StyledEngineProvider>
   );

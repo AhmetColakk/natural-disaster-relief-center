@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   signOut,
   signInWithRedirect,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
@@ -36,4 +37,5 @@ export {
   signInWithPopup,
   signOut,
   signInWithRedirect,
+  createUserWithEmailAndPassword,
 };

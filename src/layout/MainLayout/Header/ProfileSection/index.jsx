@@ -66,7 +66,7 @@ const ProfileSection = () => {
     console.log('Logout');
     const logoutUser = await signOutUser();
     await logoutUser(dispatch);
-    navigate('/pages/login/login3');
+    navigate('/auth/login');
   };
 
   const handleClose = event => {
