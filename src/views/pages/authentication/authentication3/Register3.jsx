@@ -43,7 +43,7 @@ const Register = () => {
                   justifyContent='center'
                 >
                   <Grid item sx={{ mb: 3 }}>
-                    <Link to='#'>
+                    <Link to='/'>
                       <Logo />
                     </Link>
                   </Grid>
@@ -94,7 +94,7 @@ const Register = () => {
                     >
                       <Typography
                         component={Link}
-                        to='/pages/login/login3'
+                        to='/auth/login'
                         variant='subtitle1'
                         sx={{ textDecoration: 'none' }}
                       >

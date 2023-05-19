@@ -19,15 +19,16 @@ import {
   Route,
 } from 'react-router-dom';
 import Loadable from '@/ui-component/Loadable';
-import MainLayout from '@/layout/MainLayout';
-import LandingLayout from '@/layout/Landing';
+import DashboardLayout from '@/layout/MainLayout';
 
 import NotFound from '../views/NotFound';
 import MinimalLayout from '@/layout/MinimalLayout';
+import AppLayout from '../layout/App';
 
-import LandingPage from '../views/Landing';
-import About from '../views/landing/About';
-import Contact from '../views/landing/Contact';
+const LandingPage = Loadable(lazy(() => import('../views/Landing')));
+const About = Loadable(lazy(() => import('../views/landing/About')));
+const Contact = Loadable(lazy(() => import('../views/landing/Contact')));
+
 // login option 3 routing
 const AuthLogin3 = Loadable(
   lazy(() => import('@/views/pages/authentication/authentication3/Login3')),
@@ -56,12 +57,12 @@ const SamplePage = Loadable(lazy(() => import('@/views/sample-page')));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' errorElement={<NotFound />}>
+    <Route path='/' element={<AppLayout />} errorElement={<NotFound />}>
       <Route index element={<LandingPage />} />
       <Route path='/about' element={<About />} />
       <Route path='/contact' element={<Contact />} />
 
-      <Route path='/dashboard' element={<MainLayout />}>
+      <Route path='/dashboard' element={<DashboardLayout />}>
         <Route index element={<DashboardDefault />} />
         <Route path='colors' element={<UtilsColor />} />
         <Route path='shadows' element={<UtilsShadow />} />

@@ -54,7 +54,7 @@ const ProfileSection = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  console.log(user);
+
   const userName = user ? user.providerData[0].displayName || user.email : '';
 
   const userImg = user && user.providerData[0].photoURL;

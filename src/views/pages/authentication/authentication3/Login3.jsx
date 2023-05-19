@@ -43,7 +43,7 @@ const Login = () => {
                   justifyContent='center'
                 >
                   <Grid item sx={{ mb: 3 }}>
-                    <Link to='#'>
+                    <Link to='/'>
                       <Logo />
                     </Link>
                   </Grid>

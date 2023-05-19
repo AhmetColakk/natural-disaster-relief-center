@@ -17,18 +17,16 @@ const App = () => {
   const customization = useSelector(state => state.customization);
   const user = useSelector(state => state.auth.user);
   useEffect(() => {
-    console.log(user);
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js');
       });
     }
-  });
+  }, []);
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={themes(customization)}>
         <CssBaseline />
-
         <AppRoutes />
       </ThemeProvider>
     </StyledEngineProvider>
